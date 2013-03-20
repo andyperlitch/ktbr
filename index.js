@@ -19,8 +19,8 @@ module.exports = function (file) {
         var pending = 0;
         
         var output = falafel(data, function (node) {
-            // Check for `var precomp = require('precomp') calls 
-            if (isRequire(node) && node.arguments[0].value === 'precomp'
+            // Check for `var kt = require('knights-templar') calls 
+            if (isRequire(node) && node.arguments[0].value === 'knights-templar'
             && node.parent.type === 'VariableDeclarator'
             && node.parent.id.type === 'Identifier') {
                 // remove them
@@ -32,16 +32,15 @@ module.exports = function (file) {
             && node.callee.type === 'MemberExpression'
             && node.callee.object.type === 'Identifier'
             && precompNames[node.callee.object.name]
-            && node.callee.property.type === 'Identifier') {
+            && node.callee.property.type === 'Identifier'
+            && node.callee.property.name === 'make' ) {
                 
                 // Get the contents of the file named
                 var args = node.arguments;
                 var t = 'return ' + unparse(args[0]);
                 var fpath = Function(vars, t)(file, dirname);
-                var enc = args[1]
-                    ? Function('return ' + unparse(args[1]))()
-                    : 'utf8'
-                ;
+                var enc = 'utf8';
+                var type = unparse(args[1]).replace(/['"]/g, "") || 'hbs';
                 ++ pending;
                 fs.readFile(fpath, enc, function (err, src) {
                     // check for error
@@ -51,13 +50,10 @@ module.exports = function (file) {
                     var template = '';
                     
                     // switch based on the template method called
-                    switch(node.callee.property.name) {
-                        case "hbs": 
-                            // Handlebars
-                            template = 'Handlebars.template('+handlebars.precompile(src)+')';
-                            break;
+                    switch(type) {
+                        
 
-                        case "_erb": // Underscore erb-style
+                        case "_": // Underscore erb-style
                             
                             
                             
@@ -68,9 +64,15 @@ module.exports = function (file) {
                             
                             
                         break;
+                        
+                        case "hbs": 
+                            // Handlebars
+                            template = 'Handlebars.template('+handlebars.precompile(src)+')';
+                            break;
                     }
                     
                     // update the node
+                    
                     node.update(template);
                     
                     // check if this is the last one

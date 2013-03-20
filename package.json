@@ -1,36 +1,41 @@
 {
+    "name": "knights-templar-br",
+    "version": "0.0.0",
+    "description": "inline ye compiled templates with browserify and the knights-templar module",
+    "main": "index.js",
     "dependencies": {
         "through": "~2.2.0",
         "falafel": "~0.1.6",
         "escodegen": "0.0.17",
-        "handlebars": ">=1.0.0"
+        "handlebars": ">=1.0.0",
+        "knights-templar": ""
     },
     "devDependencies": {
         "jasmine-node":"",
-        "browserify": "~2.3.1"
+        "browserify": ">=2.7.1"
     },
     "scripts": {
         "test": "jasmine-node specs/"
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/substack/brfs.git"
+        "url": "git://github.com/andyperlitch/knights-templar-br.git"
     },
     "keywords": [
         "browserify",
-        "fs",
-        "readFileSync",
+        "transform",
+        "precompile",
+        "templates",
+        "handlebars",
+        "underscore",
         "plugin",
-        "static",
         "asset",
-        "bundle",
-        "base64",
-        "underscore"
+        "bundle"
     ],
     "author": {
-        "name": "Andy Perlitch",
+        "name": "andy perlitch",
         "email": "andyperlitch@gmail.com",
         "url": "http://github.com/andyperlitch"
     },
-    "license": "MIT"
+    "license": "BSD"
 }
