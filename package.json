@@ -1,0 +1,36 @@
+{
+    "dependencies": {
+        "through": "~2.2.0",
+        "falafel": "~0.1.6",
+        "escodegen": "0.0.17",
+        "handlebars": ">=1.0.0"
+    },
+    "devDependencies": {
+        "jasmine-node":"",
+        "browserify": "~2.3.1"
+    },
+    "scripts": {
+        "test": "jasmine-node specs/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/substack/brfs.git"
+    },
+    "keywords": [
+        "browserify",
+        "fs",
+        "readFileSync",
+        "plugin",
+        "static",
+        "asset",
+        "bundle",
+        "base64",
+        "underscore"
+    ],
+    "author": {
+        "name": "Andy Perlitch",
+        "email": "andyperlitch@gmail.com",
+        "url": "http://github.com/andyperlitch"
+    },
+    "license": "MIT"
+}
