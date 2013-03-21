@@ -11,11 +11,11 @@
         "knights-templar": ""
     },
     "devDependencies": {
-        "jasmine-node":"",
+        "mocha":"~1.8.2",
         "browserify": "~2.7.1"
     },
     "scripts": {
-        "test": "jasmine-node specs/"
+        "test": "mocha ./test/*.js"
     },
     "repository": {
         "type": "git",
