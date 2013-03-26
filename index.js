@@ -40,7 +40,7 @@ module.exports = function (file) {
                 var t = 'return ' + unparse(args[0]);
                 var fpath = Function(vars, t)(file, dirname);
                 var enc = 'utf8';
-                var type = unparse(args[1]).replace(/['"]/g, "") || 'hbs';
+                var type = args[1] ? unparse(args[1]).replace(/['"]/g, "") : 'hbs';
                 ++ pending;
                 fs.readFile(fpath, enc, function (err, src) {
                     // check for error

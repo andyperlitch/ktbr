@@ -2,6 +2,7 @@ var assert = require("assert");
 var browserify = require("browserify");
 var Stream = require('stream');
 var fs = require('fs');
+var exec = require('child_process').exec;
 
 describe("the knights templar transform function for browserify", function() {
     
@@ -41,6 +42,16 @@ describe("the knights templar transform function for browserify", function() {
         );
     });
     
-    
+    it("should be callable with the -t argument of browserify", function(done){
+        exec('browserify -t ktbr ./test/file1.js', function(err, stdout, stderr){
+            
+            var regex = /require\('knights-templar'\)/;
+            assert(!stderr);
+            assert(stdout.length > 0);
+            assert(!regex.test(stdout));
+            
+            done();
+        })
+    });
     
 })

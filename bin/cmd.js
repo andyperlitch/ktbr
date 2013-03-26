@@ -3,6 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var ktbr = require('../');
 var file = process.argv[2];
+console.log("file: ", file);
 
 if (file === '-h' || file === '--help') {
     return fs.createReadStream(path.join(__dirname, 'usage.txt'))
