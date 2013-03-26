@@ -4,6 +4,8 @@ inline ye compiled templates with browserify and the [knights-templar](https://g
 
 ##usage
 
+###api
+
     // template.html
     <p><strong>{{name}}</strong> - age {{age}}
     
@@ -21,6 +23,11 @@ inline ye compiled templates with browserify and the [knights-templar](https://g
     .transform(ktb)
     .bundle()
     .pipe(fs.createWriteStream('./bundle.js'));
+
+###cli
+    
+    npm install -g ktbr
+    browserify -t ktbr test/file1.js > bundle.js
 
 
 Keep in mind that for Handlebars, the bundle will only work if the Handlebars-runtime (or full Handlebars library) is included on the page. Both are available at the [Handlebars website](http://handlebarsjs.com/). So, using the above as an example, your html should look something like this:
