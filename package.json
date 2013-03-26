@@ -1,5 +1,5 @@
 {
-    "name": "knights-templar-br",
+    "name": "ktbr",
     "version": "0.0.1",
     "description": "inline ye compiled templates with browserify and the knights-templar module",
     "main": "index.js",
@@ -37,5 +37,8 @@
         "email": "andyperlitch@gmail.com",
         "url": "http://github.com/andyperlitch"
     },
-    "license": "BSD"
+    "license": "BSD",
+    "bin": {
+        "ktbr": "./bin/cmd.js"
+    }
 }
