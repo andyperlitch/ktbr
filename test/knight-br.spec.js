@@ -54,4 +54,23 @@ describe("the knights templar transform function for browserify", function() {
         })
     });
     
+    it("should be able to compile underscore templates", function(done){
+        var tkr = require('../');
+        var bundle = browserify('./test/file2.js')
+        .transform(tkr)
+        .bundle(
+            {
+                detectGlobals: true
+            }, 
+            function(err, src) {
+                var regex = /require\('knights-templar'\)/;
+                assert(!err);
+                assert(src.length > 0);
+                assert(!regex.test(src));
+                
+                done();
+            }
+        );
+    });
+    
 })

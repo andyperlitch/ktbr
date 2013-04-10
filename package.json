@@ -1,44 +1,45 @@
 {
-    "name": "ktbr",
-    "version": "0.0.2",
-    "description": "inline ye compiled templates with browserify and the knights-templar module",
-    "main": "index.js",
-    "dependencies": {
-        "through": "~2.2.0",
-        "falafel": "~0.1.6",
-        "escodegen": "0.0.17",
-        "handlebars": ">=1.0.0",
-        "knights-templar": ""
-    },
-    "devDependencies": {
-        "mocha":"~1.8.2",
-        "browserify": ">=2.8"
-    },
-    "scripts": {
-        "test": "mocha ./test/*.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/andyperlitch/ktbr.git"
-    },
-    "keywords": [
-        "browserify",
-        "transform",
-        "precompile",
-        "templates",
-        "handlebars",
-        "underscore",
-        "plugin",
-        "asset",
-        "bundle"
-    ],
-    "author": {
-        "name": "andy perlitch",
-        "email": "andyperlitch@gmail.com",
-        "url": "http://github.com/andyperlitch"
-    },
-    "license": "BSD",
-    "bin": {
-        "ktbr": "./bin/cmd.js"
-    }
+  "name": "ktbr",
+  "version": "0.0.3",
+  "description": "inline ye compiled templates with browserify and the knights-templar module",
+  "main": "index.js",
+  "dependencies": {
+    "through": "~2.2.0",
+    "falafel": "~0.1.6",
+    "escodegen": "0.0.17",
+    "handlebars": ">=1.0.0",
+    "knights-templar": "",
+    "underscore": "~1.4.4"
+  },
+  "devDependencies": {
+    "mocha": "~1.8.2",
+    "browserify": ">=2.8"
+  },
+  "scripts": {
+    "test": "mocha ./test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/andyperlitch/ktbr.git"
+  },
+  "keywords": [
+    "browserify",
+    "transform",
+    "precompile",
+    "templates",
+    "handlebars",
+    "underscore",
+    "plugin",
+    "asset",
+    "bundle"
+  ],
+  "author": {
+    "name": "andy perlitch",
+    "email": "andyperlitch@gmail.com",
+    "url": "http://github.com/andyperlitch"
+  },
+  "license": "BSD",
+  "bin": {
+    "ktbr": "./bin/cmd.js"
+  }
 }

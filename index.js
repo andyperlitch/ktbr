@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var handlebars = require('handlebars');
+var _ = require('underscore');
 var through = require('through');
 var falafel = require('falafel');
 var unparse = require('escodegen').generate;
@@ -55,15 +56,14 @@ module.exports = function (file) {
 
                         case "_": // Underscore erb-style
                             
-                            
-                            
-                        break;
+                            template = _.template(src).source;
+                            break;
                         
                         case "_stache": // Underscore {{mustache}}-style
                             
                             
                             
-                        break;
+                            break;
                         
                         case "hbs": 
                             // Handlebars
