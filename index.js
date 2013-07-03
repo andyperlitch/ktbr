@@ -19,71 +19,76 @@ module.exports = function (file) {
         var tr = this;
         var pending = 0;
         
-        var output = falafel(data, function (node) {
-            // Check for `var kt = require('knights-templar') calls 
-            if (isRequire(node) && node.arguments[0].value === 'knights-templar'
-            && node.parent.type === 'VariableDeclarator'
-            && node.parent.id.type === 'Identifier') {
-                // remove them
-                precompNames[node.parent.id.name] = true;
-                node.parent.parent.update('');
-            }
-            // Check for calls to methods on the precomp objects
-            if (node.type === 'CallExpression'
-            && node.callee.type === 'MemberExpression'
-            && node.callee.object.type === 'Identifier'
-            && precompNames[node.callee.object.name]
-            && node.callee.property.type === 'Identifier'
-            && node.callee.property.name === 'make' ) {
-                
-                // Get the contents of the file named
-                var args = node.arguments;
-                var t = 'return ' + unparse(args[0]);
-                var fpath = Function(vars, t)(file, dirname);
-                var enc = 'utf8';
-                var type = args[1] ? unparse(args[1]).replace(/['"]/g, "") : 'hbs';
-                ++ pending;
-                fs.readFile(fpath, enc, function (err, src) {
-                    // check for error
-                    if (err) return tr.emit('error', err);
-                    
-                    // variable to hold the node's replacement
-                    var template = '';
-                    
-                    // switch based on the template method called
-                    switch(type) {
-                        
+        try {
+            var output = falafel(data, function (node) {
+                // Check for `var kt = require('knights-templar') calls 
+                if (isRequire(node) && node.arguments[0].value === 'knights-templar'
+                && node.parent.type === 'VariableDeclarator'
+                && node.parent.id.type === 'Identifier') {
+                    // remove them
+                    precompNames[node.parent.id.name] = true;
+                    node.parent.parent.update('');
+                }
+                // Check for calls to methods on the precomp objects
+                if (node.type === 'CallExpression'
+                && node.callee.type === 'MemberExpression'
+                && node.callee.object.type === 'Identifier'
+                && precompNames[node.callee.object.name]
+                && node.callee.property.type === 'Identifier'
+                && node.callee.property.name === 'make' ) {
 
-                        case "_": // Underscore erb-style
-                            
-                            template = _.template(src).source;
-                            break;
-                        
-                        case "_stache": // Underscore {{mustache}}-style
-                            
-                            
-                            
-                            break;
-                        
-                        case "hbs": 
-                            // Handlebars
-                            template = 'Handlebars.template('+handlebars.precompile(src)+')';
-                            break;
-                    }
-                    
-                    // update the node
-                    
-                    node.update(template);
-                    
-                    // check if this is the last one
-                    if (--pending === 0) finish();
-                    
-                });
-                
-                
-                
-            }
-        });
+                    // Get the contents of the file named
+                    var args = node.arguments;
+                    var t = 'return ' + unparse(args[0]);
+                    var fpath = Function(vars, t)(file, dirname);
+                    var enc = 'utf8';
+                    var type = args[1] ? unparse(args[1]).replace(/['"]/g, "") : 'hbs';
+                    ++ pending;
+                    fs.readFile(fpath, enc, function (err, src) {
+                        // check for error
+                        if (err) return tr.emit('error', err);
+
+                        // variable to hold the node's replacement
+                        var template = '';
+
+                        // switch based on the template method called
+                        switch(type) {
+
+
+                            case "_": // Underscore erb-style
+
+                                template = _.template(src).source;
+                                break;
+
+                            case "_stache": // Underscore {{mustache}}-style
+
+
+
+                                break;
+
+                            case "hbs": 
+                                // Handlebars
+                                template = 'Handlebars.template('+handlebars.precompile(src)+')';
+                                break;
+                        }
+
+                        // update the node
+
+                        node.update(template);
+
+                        // check if this is the last one
+                        if (--pending === 0) finish();
+
+                    });
+
+
+
+                }
+            });
+        } catch (e) {
+            return tr.emit('error', e + ' in file: ' + file);
+        }
+        
         
         if (pending === 0) finish();
         
