@@ -1,6 +1,6 @@
 {
   "name": "ktbr",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "inline ye compiled templates with browserify and the knights-templar module",
   "main": "index.js",
   "dependencies": {
