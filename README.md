@@ -2,6 +2,8 @@ knights-templar-br
 ==========
 inline ye compiled templates with browserify and the [knights-templar](https://github.com/andyperlitch/knights-templar) module.
 
+[![Build Status](https://travis-ci.org/andyperlitch/ktbr.png)](https://travis-ci.org/andyperlitch/ktbr)
+
 ##usage
 
 ###api

@@ -1,6 +1,5 @@
 var fs = require('fs');
 var path = require('path');
-var handlebars = require('handlebars');
 var _ = require('underscore');
 var through = require('through');
 var falafel = require('falafel');
@@ -42,38 +41,15 @@ module.exports = function (file) {
                     var t = 'return ' + unparse(args[0]);
                     var fpath = Function(vars, t)(file, dirname);
                     var enc = 'utf8';
-                    var type = args[1] ? unparse(args[1]).replace(/['"]/g, "") : 'hbs';
                     ++ pending;
                     fs.readFile(fpath, enc, function (err, src) {
                         // check for error
                         if (err) return tr.emit('error', err);
 
                         // variable to hold the node's replacement
-                        var template = '';
-
-                        // switch based on the template method called
-                        switch(type) {
-
-
-                            case "_": // Underscore erb-style
-
-                                template = _.template(src).source;
-                                break;
-
-                            case "_stache": // Underscore {{mustache}}-style
-
-
-
-                                break;
-
-                            case "hbs": 
-                                // Handlebars
-                                template = 'Handlebars.template('+handlebars.precompile(src)+')';
-                                break;
-                        }
+                        var template = _.template(src).source;
 
                         // update the node
-
                         node.update(template);
 
                         // check if this is the last one

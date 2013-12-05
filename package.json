@@ -7,13 +7,12 @@
     "through": "~2.2.0",
     "falafel": "~0.1.6",
     "escodegen": "0.0.17",
-    "handlebars": ">=1.0.0",
-    "knights-templar": "",
+    "knights-templar": "~0.2.1",
     "underscore": "~1.4.4"
   },
   "devDependencies": {
     "mocha": "~1.8.2",
-    "browserify": ">=2.8"
+    "browserify": "~2.36.1"
   },
   "scripts": {
     "test": "mocha ./test/*.js"

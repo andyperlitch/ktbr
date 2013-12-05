@@ -17,8 +17,8 @@ describe("the knights templar transform function for browserify", function() {
     
     it("should be chainable with browserify.transform()", function() {
         var tkr = require('../');
-        var bundle = browserify('./file1.js')
-        .transform('../index')
+        var bundle = browserify('./test/file1.js')
+        .transform('.')
         .bundle();
         assert.ok(bundle instanceof Stream);
     });
@@ -56,7 +56,7 @@ describe("the knights templar transform function for browserify", function() {
     
     it("should be able to compile underscore templates", function(done){
         var tkr = require('../');
-        var bundle = browserify('./test/file2.js')
+        var bundle = browserify('./test/file1.js')
         .transform(tkr)
         .bundle(
             {
